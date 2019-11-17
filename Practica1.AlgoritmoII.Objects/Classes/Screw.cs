@@ -10,11 +10,11 @@ namespace Practica1.AlgoritmoII.Objects.Classes
     {
         public string ScreName { get; set; }
         public int Diameter { get; set; }
-
+        public bool Matched { get; set; }
         public Screw(int _diameter)
         {
             Diameter = _diameter;
-            ScreName = "SCREW ID: " + new Random().Next(1);
+            ScreName = "SW-" + new Random().Next();
         }
     }
 }

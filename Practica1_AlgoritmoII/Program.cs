@@ -25,6 +25,15 @@ namespace Practica1_AlgoritmoII
                     break;
                 }
             }
+
+            var setUp = new SetUp(nutQuantity, screwQuantity, minDiameterSize, maxDiameterSize);
+
+
+            //TODO: REMOVE COMPARE FOR SETUP class
+            setUp.Compare(setUp.Nuts, setUp.Screws);
+            setUp.PrintResult();
+            //setUp
+
         }
 
         /// <summary>
@@ -35,8 +44,7 @@ namespace Practica1_AlgoritmoII
         {
 
             //TODO: Maybe use an try and catch block and remove all the return false values
-         
-
+        
             Console.WriteLine("Nut Quantity");
             if (!int.TryParse(Console.ReadLine(), out  nutQuantity))
             {
@@ -52,14 +60,14 @@ namespace Practica1_AlgoritmoII
             };
 
             Console.WriteLine("Min Diameter Size: ");
-            if (!int.TryParse(Console.ReadLine(), out int minDiameterSize))
+            if (!int.TryParse(Console.ReadLine(), out minDiameterSize))
             {
                 Console.WriteLine($"{minDiameterSize} is not a number");
                 return false;
             };
 
             Console.WriteLine("Max Diameter Size: ");
-            if (!int.TryParse(Console.ReadLine(), out int maxDiameterSize))
+            if (!int.TryParse(Console.ReadLine(), out maxDiameterSize))
             {
                 Console.WriteLine($"{maxDiameterSize} is not a number");
                 return false;

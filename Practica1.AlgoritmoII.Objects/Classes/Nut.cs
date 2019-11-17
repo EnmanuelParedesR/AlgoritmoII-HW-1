@@ -10,11 +10,11 @@ namespace Practica1.AlgoritmoII.Objects.Classes
     {
         public string NutName { get; set; }
         public int Diameter { get; set; }
-
+        public bool Matched { get; set; }
         public Nut(int _diameter)
         {
             Diameter = _diameter;
-            NutName = "NUT ID: " + new Random().Next(1);
+            NutName = "NT-" + new Random().Next();
         }
 
     }
