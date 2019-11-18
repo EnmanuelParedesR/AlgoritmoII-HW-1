@@ -1,4 +1,4 @@
-﻿using Practica1.AlgoritmoII.Objects.Classes;
+﻿using Practica1.AlgoritmoII.Objects.Classes.Ejercicio2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,23 @@ using System.Threading.Tasks;
 
 namespace Practica1_AlgoritmoII
 {
+    /// <summary>
+    /// Alternative 
+    /// 
+    /// Use a bucket algorithm with Matches: 
+    /// Arreglo donde cada posicion tenga un arreglo de matches [fix below]
+    /// 
+    //public class results
+    //{
+    //    Match[] matchesArray;
+    //}
+    ///     Diametro equal to index + inferiorLimit
+    /// 
+    /// -On Compare-
+    /// first position -for example, diameter 1 on matches array]
+    /// find all the screws and Nuts with diameter 1 and combine then [if one or another end, exit] 
+    /// Set on position. [3 KetValuePair founded, then matches[1] = 3]
+    /// </summary>
 
     public class Program
     {
@@ -14,7 +31,7 @@ namespace Practica1_AlgoritmoII
         public static int screwQuantity = 0;
         public static int minDiameterSize = 0;
         public static int maxDiameterSize = 0;
-        
+
         static void Main(string[] args)
         {
             while (true)
@@ -26,13 +43,25 @@ namespace Practica1_AlgoritmoII
                 }
             }
 
-            var setUp = new SetUp(nutQuantity, screwQuantity, minDiameterSize, maxDiameterSize);
+            var Container = new Container(nutQuantity, screwQuantity, minDiameterSize, maxDiameterSize);
 
+            //Timer
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            //
+            Container.Compare();
 
-            //TODO: REMOVE COMPARE FOR SETUP class
-            setUp.Compare(setUp.Nuts, setUp.Screws);
-            setUp.PrintResult();
-            //setUp
+            //Timer end
+            watch.Stop();
+            Console.WriteLine("#### Time Tester ####");
+            Console.WriteLine($"Miliseconds in execution: {watch.ElapsedMilliseconds} ms");
+            Console.WriteLine("#### End Time Tester ####");
+            Console.WriteLine("\n");
+            Console.ReadLine();
+            //
+
+            Container.PrintResult();
+
+            //
 
         }
 
@@ -42,18 +71,15 @@ namespace Practica1_AlgoritmoII
         /// <returns></returns>
         public static bool InitializeParameters()
         {
-
-            //TODO: Maybe use an try and catch block and remove all the return false values
-        
             Console.WriteLine("Nut Quantity");
-            if (!int.TryParse(Console.ReadLine(), out  nutQuantity))
+            if (!int.TryParse(Console.ReadLine(), out nutQuantity))
             {
                 Console.WriteLine($"{nutQuantity} is not a number");
                 return false;
             };
 
             Console.WriteLine("Screw Quantity");
-            if (!int.TryParse(Console.ReadLine(), out  screwQuantity))
+            if (!int.TryParse(Console.ReadLine(), out screwQuantity))
             {
                 Console.WriteLine($"{screwQuantity} is not a number");
                 return false;

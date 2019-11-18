@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5EAE0928-1D9B-437A-8110-F2F3D9896858}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Practica1.AlgoritmoII.Objects</RootNamespace>
-    <AssemblyName>Practica1.AlgoritmoII.Objects</AssemblyName>
+    <ProjectGuid>{9AEC0C7D-FB24-4C30-8066-B924568EA746}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Practica1.AlgoritmoII.Ejercicio1</RootNamespace>
+    <AssemblyName>Practica1.AlgoritmoII.Ejercicio1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,14 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes.Ejercicio1\ContainerExercise1.cs" />
-    <Compile Include="Classes.Ejercicio2\Container.cs" />
-    <Compile Include="Classes.Ejercicio2\Match.cs" />
-    <Compile Include="Classes.Ejercicio2\Nut.cs" />
-    <Compile Include="Classes.Ejercicio2\results.cs" />
-    <Compile Include="Classes.Ejercicio2\Screw.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Practica1.AlgoritmoII.Objects\Practica1.AlgoritmoII.Objects.csproj">
+      <Project>{5EAE0928-1D9B-437A-8110-F2F3D9896858}</Project>
+      <Name>Practica1.AlgoritmoII.Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Practica1.AlgoritmoII.Objects.Classes
+namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
 {
-    public class Nut
+    public class Screw
     {
-        public string NutName { get; set; }
+        public string ScreName { get; set; }
         public int Diameter { get; set; }
         public bool Matched { get; set; }
-        public Nut(int _diameter)
+        public Screw(int _diameter)
         {
             Diameter = _diameter;
-            NutName = "NT-" + new Random().Next();
+            ScreName = "SW-" + StaticRandom.Instance.Next(1,999);
         }
-
     }
 }
