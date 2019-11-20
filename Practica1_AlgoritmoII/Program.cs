@@ -48,6 +48,10 @@ namespace Practica1_AlgoritmoII
             //Timer
             var watch = System.Diagnostics.Stopwatch.StartNew();
             //
+
+            //Compare With Bucket [PrintResult not added]
+            //Container.CompareWithBucketMethod();
+
             Container.Compare();
 
             //Timer end

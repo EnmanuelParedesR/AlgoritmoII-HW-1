@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
 {
+    /// <summary>
+    /// TODO: Clean Bucket part and get out of this file bucket classes.
+    /// </summary>
     public class Container
     {
         public int NutsQuantity, ScrewQuantity;
@@ -81,6 +84,8 @@ namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
             Console.ReadLine();
         }
 
+
+        #region Normal Compare
         public void Compare()
         {
             if (Nuts.Length == 0 || Screws.Length == 0)
@@ -102,19 +107,181 @@ namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
                 }
             }
         }
+        #endregion
 
-        public Results[] CompareWithBucketMethod()
+        #region BUCKET
+
+        //TODO: Add a PrintResult for Bucket
+        //public void PrintResultBucket()
+        //{
+        //    var resultNumber = 1;
+        //    Console.WriteLine("########## Results #############");
+
+         
+        //    else
+        //    {
+        //        foreach (var match in dictionaryName)
+        //        {
+        //            Console.WriteLine("\n");
+        //            Console.WriteLine($"Result #{resultNumber}");
+        //            resultNumber += 1;
+        //            Console.WriteLine($"Diameter: {match.Diameter}");
+        //            Console.WriteLine($"Screw Name: {match.Screw.ScreName}");
+        //            Console.WriteLine($"Nut Name: {match.Nut.NutName}");
+        //        }
+        //    }
+
+        //    Console.WriteLine("########## End Results #############");
+
+        //    Console.WriteLine("\n");
+        //    Console.WriteLine($"Total Matches: #{matches.Count}");
+
+        //    Console.WriteLine($"Total of Screws not matched: #{Screws.Where(screw => !screw.Matched).Count()}");
+        //    Console.WriteLine($"Total of Nuts not matched: #{Nuts.Where(nut => !nut.Matched).Count()}");
+        //    Console.ReadLine();
+        //}
+
+        public Dictionary<Screw, Nut> CompareWithBucketMethod()
         {
-            var results = new Results[minDiameterSize - maxDiameterSize];
-            //Where a [index equal to diameter]
-             
+            var ScrewsSorted = Sort(maxDiameterSize - minDiameterSize, Screws, minDiameterSize);
+            var NutSorted = Sort(maxDiameterSize - minDiameterSize, Nuts, minDiameterSize);
+
+            var DictionaryResult = new Dictionary<Screw, Nut>();
 
 
-            for (var a = 0; a < results.Length; a++)
+            for (var i = 0; i < ScrewsSorted.Result.Length; i++)
             {
-                var _nuts = Nuts.Where(nut => nut.Diameter == a);
-                var _screws = Screws.Where(nut => nut.Diameter == a);
+                //No Screws with this diameter, exit
+                if (ScrewsSorted.Result[i].Screws.Count == 0)
+                    continue;
+
+                foreach (var screw in ScrewsSorted.Result[i].Screws)
+                {
+                    if (!screw.Matched)
+                        if (NutSorted.Result[i].NutMatches != NutSorted.Result[i].Nuts.Count)
+                        {
+                            //Puedo utilizar el contador NutMatches para saltar el elemento que ya esta matched
+
+                            for (var z = NutSorted.Result[i].NutMatches; z < NutSorted.Result[i].Nuts.Count; z++)
+                            {
+
+                                if (!NutSorted.Result[i].Nuts[z].Matched)
+                                {
+                                    NutSorted.Result[i].NutMatches++;
+                                    NutSorted.Result[i].Nuts[z].Matched = screw.Matched = true;
+                                    DictionaryResult.Add(screw, NutSorted.Result[i].Nuts[z]);
+                                    break;
+                                }
+                            }
+
+                            //foreach (var nut in NutSorted.Result[i].Nuts)
+                            //{
+                            //    if (!nut.Matched)
+                            //    {
+                            //        NutSorted.Result[i].NutMatches++;
+                            //        nut.Matched = screw.Matched = true;
+                            //        DictionaryResult.Add(screw, nut);
+                            //        break;
+                            //    }
+                            //}
+                        }
+                }
             }
+            return DictionaryResult;
+        }
+
+        public class BucketScrews
+        {
+            public List<Screw> Screws { get; set; }
+        }
+
+        public class ResultBucketScrews
+        {
+            public BucketScrews[] Result { get; set; }
+            public readonly int MinRange; //Check if is needed
+        
+            public ResultBucketScrews(BucketScrews[] _result, int _minRange)
+            {
+                Result = _result;
+                MinRange = _minRange;
+            }
+
+
+        }
+        #endregion
+        #region Nuts
+
+        public class ResultBucketNuts
+        {
+            public BucketNuts[] Result { get; set; }
+            public readonly int MinRange; //Check if is needed
+
+            public ResultBucketNuts(BucketNuts[] _result, int _minRange)
+            {
+                Result = _result;
+                MinRange = _minRange;
+            }
+        }
+        public class BucketNuts
+        {
+            public List<Nut> Nuts { get; set; }
+            public int NutMatches = 0;
+        }
+        #endregion
+
+        //Functions FIX Summary
+        /// <summary>
+        /// Sort with Nuts
+        /// </summary>
+        /// <param name="range"></param>
+        /// <param name="_arrayToBeSort"></param>
+        /// <param name="minRange"></param>
+        /// <returns></returns>
+        public static ResultBucketNuts Sort(int range, Nut[] _arrayToBeSort, int minRange)
+        {
+            BucketNuts[] count = new BucketNuts[range + 1];
+
+            for (var i = 0; i < count.Length; i++)
+            {
+
+                count[i] = new BucketNuts();
+                count[i].Nuts = new List<Nut>();
+            }
+
+            for (int i = 0; i < _arrayToBeSort.Length; i++)
+            {
+                count[_arrayToBeSort[i].Diameter - minRange].Nuts.Add(_arrayToBeSort[i]);
+
+            }
+
+            var results = new ResultBucketNuts(count, minRange);
+
+            return results;
+        }
+
+        /// <summary>
+        /// Sort with Screw
+        /// </summary>
+        /// <param name="range"></param>
+        /// <param name="_arrayToBeSort"></param>
+        /// <param name="minRange"></param>
+        /// <returns></returns>
+        public static ResultBucketScrews Sort(int range, Screw[] _arrayToBeSort, int minRange)
+        {
+            BucketScrews[] count = new BucketScrews[range + 1];
+
+            //Make generic initializer
+            for (var i = 0; i < count.Length; i++)
+            {
+                count[i] = new BucketScrews();
+                count[i].Screws = new List<Screw>();
+            }
+
+            for (int i = 0; i < _arrayToBeSort.Length; i++)
+            {
+                count[_arrayToBeSort[i].Diameter - minRange].Screws.Add(_arrayToBeSort[i]);
+            }
+            var results = new ResultBucketScrews(count, minRange);
             return results;
         }
 

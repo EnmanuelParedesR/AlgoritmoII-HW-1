@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Practica1.AlgoritmoII.Objects.Classes.Ejercicio2.Container;
 
 namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
 {
-    public class Screw
-    {
+    public class Screw /*: ITest*/
+    { 
         public string ScreName { get; set; }
         public int Diameter { get; set; }
         public bool Matched { get; set; }

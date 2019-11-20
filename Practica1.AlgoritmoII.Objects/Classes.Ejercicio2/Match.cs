@@ -14,7 +14,7 @@ namespace Practica1.AlgoritmoII.Objects.Classes.Ejercicio2
             Nut = _nut;
             Screw = _screw;
 
-            if (_nut.Diameter != _screw.Diameter)
+            if (!_nut.Diameter.Equals(_screw.Diameter))
                 throw new Exception("Error with diameter compare");
             Diameter = _nut.Diameter;
         }
